@@ -1,14 +1,17 @@
  language: python
-dist: focal  
 python:
-  - "3.10"   
+  - "3.10"  # Specify Python version
 
-before_install:
-  - sudo apt-get update
+# Cache dependencies to speed up builds
+cache: pip
 
+# Install required dependencies
 install:
-  - python3 -m pip install --upgrade pip
-  - python3 -m pip install telebot pymongo aiohttp
+  - pip install --upgrade pip
+  - pip install flask  # Flask dependency for the script
+  - pip install telebot pymongo aichatp  # Include any other necessary dependencies
 
+# Commands to run the script
 script:
-  - chmod +x * && chmod +x RAGNAROK && python3 RAGNAROK.py
+  - chmod +x RAGNAROK.py  # Make the Python script executable
+  - python3 RAGNAROK.py   # Execute the script
