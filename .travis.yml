@@ -1,22 +1,14 @@
- Build Config
+ language: python
+dist: focal  
+python:
+  - "3.10"   
 
-{
-  "language": "python",
-  "os": [
-    "linux"
-  ],
-  "dist": "focal",
-  "python": [
-    "3.10"
-  ],
-  "before_install": [
-    "sudo apt-get update"
-  ],
-  "install": [
-    "python3 -m pip install --upgrade pip",
-    "python3 -m pip install telebot pymongo aiohttp"
-  ],
-  "script": [
-    "chmod +x * && chmod +x RAGNAROK && python3 RAGNAROK.py"
-  ]
-}
+before_install:
+  - sudo apt-get update
+
+install:
+  - python3 -m pip install --upgrade pip
+  - python3 -m pip install telebot pymongo aiohttp
+
+script:
+  - chmod +x * && chmod +x RAGNAROK && python3 RAGNAROK.py
