@@ -1,17 +1,32 @@
- language: python
-python:
-  - "3.10"  # Specify Python version
+name: Python CI
 
-# Cache dependencies to speed up builds
-cache: pip
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+  pull_request:
 
-# Install required dependencies
-install:
-  - pip install --upgrade pip
-  - pip install flask  # Flask dependency for the script
-  - pip install telebot pymongo aichatp  # Include any other necessary dependencies
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# Commands to run the script
-script:
-  - chmod +x RAGNAROK.py  # Make the Python script executable
-  - python3 RAGNAROK.py   # Execute the script
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flask
+          pip install telebot pymongo openai
+
+      - name: Make script executable
+        run: chmod +x RAGNAROK.py
+
+      - name: Run script
+        run: python RAGNAROK.py
